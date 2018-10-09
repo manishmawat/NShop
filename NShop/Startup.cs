@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NShop.DataStore;
+using NShop.DataStore.ProductsStore;
+using NShop.Repository.Products;
 
 namespace NShop
 {
@@ -27,6 +30,9 @@ namespace NShop
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddScoped<IProductsRepository, ProductsRepository>();
+            services.AddTransient<IDataStore, InMemoryProductsStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,13 +51,9 @@ namespace NShop
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseStatusCodePages();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
 
             app.UseSpa(spa =>
             {
