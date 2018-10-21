@@ -4,8 +4,8 @@
 
 <p *ngIf="!productList"><em>Loading...</em></p>
 
-<table class='table' *ngIf="productList">
-  <thead>
+<table mdbTable class='table' *ngIf="productList">
+  <thead class="black white-text">
     <tr>
       <th>Name</th>
       <th>Description (C)</th>
@@ -16,9 +16,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let product of productList">
-      <td>{{ product.name }}</td>
+      <td><a [routerLink]="['/product',product.id]">{{ product.name }}</a></td>
       <td>{{ product.description }}</td>
-      <td>{{ product.price }}</td>
+      <td>{{ product.price | currency:'CAD':symbol }}</td>
       <td>{{ product.available }}</td>
       <td>{{ product.unit }}</td>
     </tr>

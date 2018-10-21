@@ -11,6 +11,9 @@ import { HomeComponent } from './home/home.component';
 // import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NshopConfigService } from './services/nshop-config.service';
 import { ProductComponent } from './product/product.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import {MatCardModule} from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appInitializerFn = (appConfig: NshopConfigService) => {
   return () => {
@@ -25,7 +28,8 @@ const appInitializerFn = (appConfig: NshopConfigService) => {
     HomeComponent,
     // CounterComponent,
     // FetchDataComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,10 +37,11 @@ const appInitializerFn = (appConfig: NshopConfigService) => {
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      // { path: 'counter', component: CounterComponent },
-      // { path: 'fetch-data', component: FetchDataComponent },
-      {path:'product',component:ProductComponent}
-    ])
+      {path:'product',component:ProductComponent},
+      {path:'product/:id',component:ProductDetailsComponent}
+    ]),
+    BrowserAnimationsModule,
+    MatCardModule
   ],
   providers: [
     NshopConfigService,
