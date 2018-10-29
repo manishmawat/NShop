@@ -9,32 +9,31 @@ import { Product } from '../model/Product';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  product:Product;
-  statusMessage:string='Please wait.. Loading data..';
+  public product: Product = <Product>{};
+  public statusMessage = 'Please wait.. Loading data..';
 
-  constructor(private _productService:ProductService,private _activatedRout:ActivatedRoute) { }
+  constructor(private _productService: ProductService, private _activatedRout: ActivatedRoute) { }
 
   ngOnInit() {
-    let id:string=this._activatedRout.snapshot.paramMap.get('id');
+    const id: string = this._activatedRout.snapshot.paramMap.get('id');
     this._productService.getProductDetails(id)
                         .subscribe(
-                          response=>{
-                            if(response==null)
-                            {
-                              this.statusMessage="There is no product with this id.";
-                            }
-                            else{
-                              this.product=response
+                          response => {
+                            // console.log('response');
+                            if (response == null) {
+
+                                this.statusMessage = 'There is no product with this id.';
+                            } else {
+                              // console.log('before product message.');
+                              this.product = response;
                             }
                           }
-                          ,(error)=>{
-                            console.log(error);
-                            if(error.status===404)
-                            {
-                              this.statusMessage='Page not found';
-                            }
-                            else{
-                            this.statusMessage=`Something went wrong.. We are working on it.. 
+                          , (error) => {
+                            // console.log(error);
+                            if (error.status === 404) {
+                              this.statusMessage = 'Page not found';
+                            } else {
+                            this.statusMessage = `Something went wrong.. We are working on it..
                             Please come after sometime`;
                             }
                           }

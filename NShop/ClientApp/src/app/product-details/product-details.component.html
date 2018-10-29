@@ -12,26 +12,9 @@
   </mat-card-content>
   <mat-card-content>{{product.price | currency:'CAD':symbol}}</mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
+    <button [routerLink]= "['/productedit',product.id]">LIKE</button>
     <button mat-button>SHARE</button>
   </mat-card-actions>
 </mat-card>
-
-
-<table class="table" *ngIf="product">
-  <th>Product Name</th>
-  <th>Description</th>
-  <th>Price</th>
-  <th>Availability</th>
-  <th>Measuring Unit</th>
-  <tr>
-    <td>{{product.name}}</td>
-    <td>{{product.description}}</td>
-    <td>{{product.price | currency:'CAD':symbol}}</td>
-    <td>{{product.available}}</td>
-    <td>{{product.unit}}</td>
-    <td></td>
-  </tr>
-</table>
 
 <div *ngIf="!product">{{statusMessage}}</div>

@@ -1,7 +1,7 @@
-export interface Product {
+export class Product {
     id: number;
-    name: string;
-    description:string;
+    name: string = null;
+    description: string = null;
     price: number;
     available: number;
     unit: string;

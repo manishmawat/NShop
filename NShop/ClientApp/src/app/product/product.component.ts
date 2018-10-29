@@ -12,12 +12,12 @@ export class ProductComponent implements OnInit {
 
   public productList: Product[];
 
-    constructor(http: HttpClient, private productService:ProductService) {
+    constructor(http: HttpClient, private productService: ProductService) {
   }
 
   ngOnInit() {
     this.productService.getProductList()
-    .subscribe(products=>this.productList=products);
+    .subscribe(products => this.productList = products);
   }
 
 }
